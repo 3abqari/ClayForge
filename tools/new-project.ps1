@@ -26,8 +26,11 @@ $ErrorActionPreference = 'Stop'
 
 $framework = Split-Path -Parent $PSScriptRoot
 $target = [System.IO.Path]::GetFullPath($Path)
+$frameworkRoot = $framework.TrimEnd([System.IO.Path]::DirectorySeparatorChar, [System.IO.Path]::AltDirectorySeparatorChar)
+$frameworkPrefix = $frameworkRoot + [System.IO.Path]::DirectorySeparatorChar
 
-if ($target.StartsWith($framework, [StringComparison]::OrdinalIgnoreCase)) {
+if ($target.Equals($frameworkRoot, [StringComparison]::OrdinalIgnoreCase) -or
+    $target.StartsWith($frameworkPrefix, [StringComparison]::OrdinalIgnoreCase)) {
   throw "Projects must live outside the framework folder. $framework is for Clayforge itself."
 }
 
