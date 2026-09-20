@@ -10,7 +10,7 @@ import { hiddenSections } from "./sections.js";
 
 export function mountUi(app) {
   const toolbar = document.createElement("div");
-  toolbar.className = "cf-toolbar";
+  toolbar.className = "cf-toolbar cf-collapsed";
   toolbar.dataset.cfChrome = "";
 
   const panel = document.createElement("section");
@@ -41,34 +41,38 @@ export function mountUi(app) {
     const hidden = hiddenSections(app.sections, app.state);
     const activeDesign = app.project.designs?.find((option) => option.id === app.state.design);
     const saved = app.state.savedAt ? `Saved ${new Date(app.state.savedAt).toLocaleString()}` : "No local changes yet";
+    const collapsed = toolbar.classList.contains("cf-collapsed");
     toolbar.innerHTML = `
       <div class="cf-toolbar-row">
         <strong class="cf-toolbar-title">${escapeHtml(app.project.name || app.project.id)}</strong>
         <span class="cf-toolbar-version">ClayForge v${escapeHtml(app.frameworkVersion)}</span>
         <span class="cf-badge cf-badge-${app.mode}">${app.mode === "designer" ? "Designer" : "Client"} mode</span>
         <span class="cf-toolbar-status">${escapeHtml(saved)}</span>
+        <button type="button" class="cf-toolbar-toggle" data-cf-action="toolbar-toggle" aria-controls="cf-toolbar-content" aria-expanded="${!collapsed}" aria-label="${collapsed ? "Expand design controls" : "Collapse design controls"}"><span aria-hidden="true">${collapsed ? "+" : "&minus;"}</span></button>
       </div>
-      <div class="cf-toolbar-groups">
-        ${app.project.designs?.length ? `<fieldset class="cf-toolbar-group cf-design-picker"><legend>Design</legend><div class="cf-design-options">${app.project.designs.map((option) => `<button type="button" data-cf-design="${escapeHtml(option.id)}" aria-pressed="${option.id === app.state.design}">${escapeHtml(option.label)}</button>`).join("")}</div></fieldset>` : ""}
-        ${activeDesign?.palette?.length ? `<fieldset class="cf-toolbar-group"><legend>Palette</legend><button type="button" class="cf-palette-button" data-cf-action="palette"><span class="cf-palette-swatches" aria-hidden="true"><span></span><span></span><span></span><span></span></span>Edit colors</button></fieldset>` : ""}
-        <fieldset class="cf-toolbar-group">
-          <legend>File</legend>
-          <div class="cf-action-group">
-            ${app.project.print ? `<button type="button" data-cf-action="print">${escapeHtml(app.project.printLabel || "Save as PDF")}</button>` : ""}
-            <button type="button" data-cf-action="export">Export my version</button>
-            <label class="cf-file">Import a version<input type="file" accept="application/json" data-cf-action="import"></label>
-          </div>
-        </fieldset>
-        <fieldset class="cf-toolbar-group">
-          <legend>Reset</legend>
-          <div class="cf-action-group">
-            <button type="button" class="cf-secondary" data-cf-action="reset-styles">Design</button>
-            <button type="button" class="cf-secondary" data-cf-action="reset-content">Text</button>
-            <button type="button" class="cf-secondary" data-cf-action="reset-all">Everything</button>
-          </div>
-        </fieldset>
+      <div id="cf-toolbar-content" class="cf-toolbar-content">
+        <div class="cf-toolbar-groups">
+          ${app.project.designs?.length ? `<fieldset class="cf-toolbar-group cf-design-picker"><legend>Design</legend><div class="cf-design-options">${app.project.designs.map((option) => `<button type="button" data-cf-design="${escapeHtml(option.id)}" aria-pressed="${option.id === app.state.design}">${escapeHtml(option.label)}</button>`).join("")}</div></fieldset>` : ""}
+          ${activeDesign?.palette?.length ? `<fieldset class="cf-toolbar-group"><legend>Palette</legend><button type="button" class="cf-palette-button" data-cf-action="palette"><span class="cf-palette-swatches" aria-hidden="true"><span></span><span></span><span></span><span></span></span>Edit colors</button></fieldset>` : ""}
+          <fieldset class="cf-toolbar-group">
+            <legend>File</legend>
+            <div class="cf-action-group">
+              ${app.project.print ? `<button type="button" data-cf-action="print">${escapeHtml(app.project.printLabel || "Save as PDF")}</button>` : ""}
+              <button type="button" data-cf-action="export">Export my version</button>
+              <label class="cf-file">Import a version<input type="file" accept="application/json" data-cf-action="import"></label>
+            </div>
+          </fieldset>
+          <fieldset class="cf-toolbar-group">
+            <legend>Reset</legend>
+            <div class="cf-action-group">
+              <button type="button" class="cf-secondary" data-cf-action="reset-styles">Design</button>
+              <button type="button" class="cf-secondary" data-cf-action="reset-content">Text</button>
+              <button type="button" class="cf-secondary" data-cf-action="reset-all">Everything</button>
+            </div>
+          </fieldset>
+        </div>
+        ${hidden.length ? `<div class="cf-toolbar-row cf-hidden-list"><span>Hidden:</span>${hidden.map((section) => `<button type="button" data-cf-show="${section.key}">${escapeHtml(section.label)}</button>`).join("")}<button type="button" data-cf-action="show-all">Show all</button></div>` : ""}
       </div>
-      ${hidden.length ? `<div class="cf-toolbar-row cf-hidden-list"><span>Hidden:</span>${hidden.map((section) => `<button type="button" data-cf-show="${section.key}">${escapeHtml(section.label)}</button>`).join("")}<button type="button" data-cf-action="show-all">Show all</button></div>` : ""}
     `;
   }
 
@@ -183,6 +187,7 @@ export function mountUi(app) {
     const sectionKey = panel.dataset.sectionKey;
 
     switch (action) {
+      case "toolbar-toggle": toolbar.classList.toggle("cf-collapsed"); renderToolbar(); break;
       case "print": window.print(); break;
       case "export": app.exportSnapshot(); break;
       case "reset-styles": if (confirm("Reset all design changes back to the original?")) app.resetAllStyles(); break;

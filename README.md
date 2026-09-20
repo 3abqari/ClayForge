@@ -40,6 +40,9 @@ On Windows, ports 8080-8093 are in a reserved exclusion range and will fail with
 
 Add `?mode=designer` to unlock every design control.
 
+The design toolbar starts collapsed so the prototype stays visible on small
+screens. Use its `+` button to expand the controls and `−` to collapse them.
+
 ## Deploy a project
 
 ```powershell
