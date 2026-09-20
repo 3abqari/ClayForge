@@ -64,6 +64,7 @@ export async function createClayForge(options = {}) {
 
   const app = {
     project,
+    frameworkVersion: ENGINE_VERSION,
     mode,
     state,
     sections,

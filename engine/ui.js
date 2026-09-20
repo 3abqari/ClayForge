@@ -44,6 +44,7 @@ export function mountUi(app) {
     toolbar.innerHTML = `
       <div class="cf-toolbar-row">
         <strong class="cf-toolbar-title">${escapeHtml(app.project.name || app.project.id)}</strong>
+        <span class="cf-toolbar-version">ClayForge v${escapeHtml(app.frameworkVersion)}</span>
         <span class="cf-badge cf-badge-${app.mode}">${app.mode === "designer" ? "Designer" : "Client"} mode</span>
         <span class="cf-toolbar-status">${escapeHtml(saved)}</span>
       </div>

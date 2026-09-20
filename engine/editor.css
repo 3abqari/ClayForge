@@ -85,6 +85,12 @@
 
 .cf-toolbar-title { font-size: 13px; }
 
+.cf-toolbar-version {
+  color: #5c6672;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+
 .cf-toolbar-status {
   margin-left: auto;
   color: #5c6672;
