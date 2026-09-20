@@ -1,0 +1,9 @@
+{
+  // The site root is src/, which holds index.html and the vendored
+  // clayforge/ framework copy. No staging or build step.
+  "name": "{{PROJECT_ID}}",
+  "compatibility_date": "2026-09-11",
+  "assets": {
+    "directory": "src"
+  }
+}

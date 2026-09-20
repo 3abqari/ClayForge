@@ -1,0 +1,12 @@
+{
+  "project": {
+    "id": "{{PROJECT_ID}}",
+    "name": "{{PROJECT_NAME}}",
+    "template": "starter",
+    "templateVersion": "1.0.0",
+    "content": "./content.json",
+    "print": false,
+    "allowDesignerMode": true
+  },
+  "sections": {}
+}

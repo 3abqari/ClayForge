@@ -1,0 +1,88 @@
+/* ============================================================================
+   {{PROJECT_NAME}} — design layer.
+   Everything visual for this project lives here, inside `@layer design`.
+   Never edit src/clayforge/theme/base.css, and never write `@layer client`.
+   ========================================================================== */
+
+@layer base, design, client;
+
+@layer design {
+  :root {
+    --brand-ink: #14181d;
+    --brand-paper: #ffffff;
+    --brand-accent: #2f6fb3;
+    --brand-muted: #5c6672;
+    --gutter: 28px;
+  }
+
+  body { background: #eef1f4; }
+
+  .page {
+    max-width: 780px;
+    margin: 32px auto;
+    background: var(--brand-paper);
+    box-shadow: 0 10px 28px rgb(20 24 29 / 12%);
+  }
+
+  .hero {
+    padding: calc(var(--gutter) * 1.6) var(--gutter);
+    color: var(--brand-paper);
+    background: var(--brand-ink);
+  }
+
+  .kicker {
+    margin: 0 0 8px;
+    color: var(--brand-accent);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .hero h1 { margin: 0 0 12px; font-size: 42px; line-height: 1.05; }
+  .lede { margin: 0; color: #cdd5de; font-size: 18px; }
+
+  .points { padding: var(--gutter); }
+  .points h2 { margin: 0 0 16px; font-size: 22px; }
+
+  .points ul {
+    display: grid;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .points li {
+    padding-left: 22px;
+    position: relative;
+    font-size: 16px;
+  }
+
+  .points li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 10px;
+    height: 10px;
+    background: var(--brand-accent);
+  }
+
+  .contact {
+    padding: var(--gutter);
+    color: var(--brand-paper);
+    background: var(--brand-accent);
+  }
+
+  .contact-label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .phone { font-size: 28px; font-weight: 800; line-height: 1; }
+  .website { margin-top: 6px; font-size: 15px; font-weight: 600; }
+}

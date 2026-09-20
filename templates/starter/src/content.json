@@ -1,0 +1,14 @@
+{
+  "kicker": "{{PROJECT_NAME}}",
+  "heroTitle": "Replace this headline.",
+  "heroLede": "One or two sentences that say what this is and who it is for.",
+  "pointsTitle": "What you get",
+  "points": [
+    "First thing that matters",
+    "Second thing that matters",
+    "Third thing that matters"
+  ],
+  "contactLabel": "Get in touch",
+  "phone": "(000) 000-0000",
+  "website": "www.example.com"
+}

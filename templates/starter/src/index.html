@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{PROJECT_NAME}}</title>
+
+  <!-- Vendored framework lives at src/clayforge and is served from the site
+       root. base.css must load first: it declares the cascade layer order. -->
+  <link rel="stylesheet" href="/clayforge/theme/base.css">
+  <link rel="stylesheet" href="./design.css">
+  <link rel="stylesheet" href="/clayforge/engine/editor.css">
+</head>
+<body>
+  <main class="page">
+    <section class="hero" data-edit="hero" data-edit-label="Hero"
+             data-edit-controls="background,color,fontFamily,fontSize,fontWeight,textAlign,padding">
+      <p class="kicker"><span data-field="kicker"></span></p>
+      <h1><span data-field="heroTitle"></span></h1>
+      <p class="lede"><span data-field="heroLede"></span></p>
+    </section>
+
+    <section class="points" data-edit="points" data-edit-label="Key Points"
+             data-edit-controls="background,color,fontSize,gap,padding">
+      <h2><span data-field="pointsTitle"></span></h2>
+      <ul data-field="points" data-field-type="list"></ul>
+    </section>
+
+    <footer class="contact" data-edit="contact" data-edit-label="Contact" data-edit-required
+            data-edit-controls="background,color,fontSize,textAlign,padding">
+      <span class="contact-label" data-field="contactLabel"></span>
+      <div class="phone" data-field="phone"></div>
+      <div class="website" data-field="website"></div>
+    </footer>
+  </main>
+
+  <script type="module">
+    import { createClayforge } from "/clayforge/engine/clayforge.js";
+    await createClayforge();
+  </script>
+</body>
+</html>

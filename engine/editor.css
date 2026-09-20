@@ -1,0 +1,315 @@
+/* ============================================================================
+   Clayforge editor chrome.
+   Deliberately UNLAYERED: unlayered rules beat every cascade layer, so project
+   design.css and client edits can never break the editing UI.
+   ========================================================================== */
+
+.cf-toolbar,
+.cf-panel,
+.cf-controls {
+  --cf-ui-ink: #10161c;
+  --cf-ui-paper: #ffffff;
+  --cf-ui-line: #c9d2dc;
+  --cf-ui-accent: #1f6feb;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  color: var(--cf-ui-ink);
+}
+
+/* ---------- Toolbar ---------- */
+
+.cf-toolbar {
+  position: fixed;
+  z-index: 2147483000;
+  inset: auto 0 0;
+  display: grid;
+  gap: 6px;
+  padding: 10px 14px;
+  background: rgb(255 255 255 / 96%);
+  border-top: 1px solid var(--cf-ui-line);
+  box-shadow: 0 -6px 18px rgb(16 22 28 / 12%);
+  backdrop-filter: blur(6px);
+}
+
+.cf-toolbar-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.cf-toolbar-groups {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 8px;
+}
+
+.cf-toolbar-group {
+  min-width: 0;
+  margin: 0;
+  padding: 6px 8px 8px;
+  border: 1px solid var(--cf-ui-line);
+  border-radius: 6px;
+  background: #f7f9fb;
+}
+
+.cf-toolbar-group legend {
+  padding: 0 4px;
+  color: #5c6672;
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.cf-action-group { display: flex; flex-wrap: wrap; gap: 5px; }
+
+.cf-palette-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cf-palette-swatches { display: inline-flex; }
+
+.cf-palette-swatches span {
+  width: 11px;
+  height: 18px;
+  border-block: 1px solid rgb(255 255 255 / 35%);
+}
+
+.cf-palette-swatches span:first-child { border-left: 1px solid rgb(255 255 255 / 35%); border-radius: 3px 0 0 3px; background: var(--design-ink); }
+.cf-palette-swatches span:nth-child(2) { background: var(--design-paper); }
+.cf-palette-swatches span:nth-child(3) { background: var(--design-primary); }
+.cf-palette-swatches span:last-child { border-right: 1px solid rgb(255 255 255 / 35%); border-radius: 0 3px 3px 0; background: var(--design-accent); }
+
+.cf-toolbar-title { font-size: 13px; }
+
+.cf-toolbar-status {
+  margin-left: auto;
+  color: #5c6672;
+  font-size: 11px;
+}
+
+.cf-badge {
+  padding: 2px 7px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.cf-badge-client { color: #16610e; background: #dcf5d6; }
+.cf-badge-designer { color: #6b3a00; background: #ffe6bd; }
+
+.cf-toolbar button,
+.cf-toolbar .cf-file,
+.cf-panel button,
+.cf-controls button {
+  cursor: pointer;
+  border: 1px solid var(--cf-ui-line);
+  border-radius: 5px;
+  padding: 6px 10px;
+  color: var(--cf-ui-paper);
+  background: var(--cf-ui-ink);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.cf-toolbar .cf-secondary,
+.cf-panel .cf-secondary {
+  color: var(--cf-ui-ink);
+  background: var(--cf-ui-paper);
+}
+
+.cf-toolbar button:hover,
+.cf-toolbar .cf-file:hover,
+.cf-panel button:hover { border-color: var(--cf-ui-accent); }
+
+.cf-file input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+
+.cf-design-picker {
+  flex: 1 1 490px;
+  min-width: 0;
+}
+
+.cf-design-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  border: 1px solid var(--cf-ui-line);
+  border-radius: 5px;
+  padding: 3px;
+  background: var(--cf-ui-paper);
+}
+
+.cf-toolbar .cf-design-options button {
+  min-height: 28px;
+  border: 0;
+  border-radius: 3px;
+  padding: 5px 9px;
+  color: var(--cf-ui-ink);
+  background: var(--cf-ui-paper);
+  white-space: nowrap;
+}
+
+.cf-toolbar .cf-design-options button:hover { color: var(--cf-ui-accent); background: #f4f7fb; }
+.cf-toolbar .cf-design-options button[aria-pressed="true"] { color: var(--cf-ui-paper); background: var(--cf-ui-accent); }
+.cf-toolbar .cf-design-options button:focus-visible { position: relative; z-index: 1; outline: 2px solid var(--cf-ui-ink); outline-offset: -2px; }
+
+@media (max-width: 760px) {
+  .cf-toolbar-groups,
+  .cf-toolbar-group { width: 100%; }
+  .cf-design-picker { flex-basis: auto; }
+  .cf-design-options button { flex: 1 1 calc(33.333% - 4px); }
+}
+
+.cf-hidden-list { font-size: 11px; }
+.cf-hidden-list button { padding: 4px 8px; }
+
+/* ---------- Per-section controls ---------- */
+
+.cf-controls {
+  position: absolute;
+  z-index: 5;
+  top: 4px;
+  right: 4px;
+  display: flex;
+  gap: 4px;
+  opacity: 0;
+  transition: opacity 120ms ease;
+  pointer-events: none;
+}
+
+[data-edit]:hover > .cf-controls,
+[data-edit]:focus-within > .cf-controls,
+.cf-controls:focus-within {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.cf-controls button {
+  padding: 3px 6px;
+  border-radius: 3px;
+  background: rgb(16 22 28 / 88%);
+  font-size: 10px;
+  box-shadow: 0 1px 4px rgb(16 22 28 / 35%);
+}
+
+/* ---------- Style panel ---------- */
+
+.cf-panel {
+  position: fixed;
+  z-index: 2147483001;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  flex-direction: column;
+  width: min(300px, calc(100vw - 32px));
+  max-height: min(70vh, calc(100vh - 140px));
+  overflow: auto;
+  border: 1px solid var(--cf-ui-line);
+  border-radius: 8px;
+  background: var(--cf-ui-paper);
+  box-shadow: 0 12px 32px rgb(16 22 28 / 24%);
+}
+
+.cf-panel[hidden] { display: none; }
+.cf-panel.cf-collapsed .cf-panel-body,
+.cf-panel.cf-collapsed .cf-panel-foot { display: none; }
+
+.cf-panel-head {
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--cf-ui-line);
+  background: var(--cf-ui-paper);
+}
+
+.cf-panel-head h2 { flex: 1; margin: 0; font-size: 13px; }
+
+.cf-panel .cf-icon {
+  width: 24px;
+  padding: 0;
+  height: 24px;
+  border-radius: 4px;
+  background: var(--cf-ui-paper);
+  color: var(--cf-ui-ink);
+  font-size: 15px;
+}
+
+.cf-panel-body { padding: 10px 12px; }
+
+.cf-group {
+  margin: 0 0 10px;
+  padding: 8px 10px 10px;
+  border: 1px solid var(--cf-ui-line);
+  border-radius: 6px;
+}
+
+.cf-group legend {
+  padding: 0 4px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.cf-field {
+  display: grid;
+  gap: 3px;
+  margin-bottom: 8px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.cf-field:last-child { margin-bottom: 0; }
+
+.cf-field input,
+.cf-field select {
+  width: 100%;
+  border: 1px solid var(--cf-ui-line);
+  border-radius: 4px;
+  padding: 4px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.cf-field input[type="color"] { height: 28px; padding: 2px; }
+.cf-field input[type="range"] { padding: 0; accent-color: var(--cf-ui-accent); }
+.cf-field output { color: #5c6672; font-weight: 400; }
+
+.cf-panel-foot {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 10px 12px;
+  border-top: 1px solid var(--cf-ui-line);
+  background: var(--cf-ui-paper);
+}
+
+.cf-note { margin: 0; font-size: 12px; color: #5c6672; }
+
+body:has(> .cf-toolbar) { padding-bottom: calc(var(--cf-toolbar-height, 150px) + 20px); }
+
+@media (max-width: 640px) {
+  .cf-panel {
+    top: auto;
+    right: 8px;
+    bottom: calc(var(--cf-toolbar-height, 150px) + 8px);
+    max-height: 46vh;
+  }
+}
+
+@media print {
+  [data-cf-chrome] { display: none !important; }
+  body:has(> .cf-toolbar) { padding-bottom: 0; }
+}
