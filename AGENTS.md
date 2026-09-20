@@ -17,6 +17,7 @@ clayforge/                      <- this repo, framework only
   templates/starter/            scaffold source, uses {{PROJECT_ID}} tokens
   tools/new-project.ps1         creates a project folder elsewhere
   tools/sync.ps1                refreshes a project's vendored copy
+  VERSION                       current semantic version
 
 <project>/                      <- a separate folder per client
   wrangler.jsonc                Cloudflare deploy, site root = src/
@@ -116,7 +117,7 @@ the matching `body[data-design="..."]` selector inside `@layer design`.
 {
   "formatVersion": 2,
   "framework": "clayforge",
-  "frameworkVersion": "0.2.0",
+  "frameworkVersion": "0.3.0",
   "template": "card-4x9",
   "templateVersion": "1.0.0",
   "savedAt": "2026-09-19T00:00:00.000Z",
@@ -129,6 +130,13 @@ the matching `body[data-design="..."]` selector inside `@layer design`.
 
 Bump `FORMAT_VERSION` in `engine/store.js` and add a migration in
 `adoptEnvelope` if the shape ever changes.
+
+## Framework releases
+
+Use `./tools/set-version.ps1 -Version X.Y.Z` for every release. It updates the
+root `VERSION` file and `ENGINE_VERSION` together. Commit both files and tag the
+same commit as `vX.Y.Z`; CI rejects version or tag mismatches. `FORMAT_VERSION`
+is independent and changes only when the snapshot schema changes.
 
 ## Running a project
 

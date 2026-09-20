@@ -24,8 +24,7 @@ $target = [System.IO.Path]::GetFullPath($Project)
 $src = Join-Path $target 'src'
 if (-not (Test-Path $src)) { throw "No src folder at $src — is this a Clayforge project?" }
 
-$version = (Get-Content (Join-Path $framework 'engine/store.js') -Raw |
-  Select-String -Pattern 'ENGINE_VERSION\s*=\s*"([^"]+)"').Matches[0].Groups[1].Value
+$version = & (Join-Path $PSScriptRoot 'check-version.ps1')
 
 $vendor = Join-Path $src 'clayforge'
 if (Test-Path $vendor) { Remove-Item $vendor -Recurse -Force }

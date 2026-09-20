@@ -4,7 +4,7 @@
  */
 
 export const FORMAT_VERSION = 2;
-export const ENGINE_VERSION = "0.2.0";
+export const ENGINE_VERSION = "0.3.0";
 const FRAMEWORK = "clayforge";
 
 const SAFE_KEY = /^[a-zA-Z0-9_-]+$/;

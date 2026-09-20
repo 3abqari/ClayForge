@@ -24,6 +24,7 @@ engine/                 discovery, controls, persistence, editor chrome
 templates/starter/      scaffold source for new projects
 tools/new-project.ps1   create a project folder elsewhere
 tools/sync.ps1          refresh a project's vendored framework copy
+VERSION                 current ClayForge release version
 ```
 
 ## Create a project
@@ -51,6 +52,24 @@ npx wrangler deploy               # assets.directory is "src", no staging
 ```powershell
 ./tools/sync.ps1 -Project ..\acme-landing
 ```
+
+The project's `clayforge.lock.json` records the exact framework version copied
+into it.
+
+## Release a new ClayForge version
+
+ClayForge uses semantic versioning. Update the repository and runtime version
+together, commit the result, then tag that commit:
+
+```powershell
+./tools/set-version.ps1 -Version 0.4.0
+git add VERSION engine/store.js
+git commit -m "Release ClayForge 0.4.0"
+git tag v0.4.0
+git push origin main v0.4.0
+```
+
+GitHub Actions rejects mismatched repository, runtime, or release-tag versions.
 
 Future framework work is tracked in [ROADMAP.md](ROADMAP.md).
 
