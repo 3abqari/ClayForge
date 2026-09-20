@@ -1,5 +1,5 @@
 /* ============================================================================
-   Clayforge editor chrome.
+  ClayForge editor chrome.
    Deliberately UNLAYERED: unlayered rules beat every cascade layer, so project
    design.css and client edits can never break the editing UI.
    ========================================================================== */

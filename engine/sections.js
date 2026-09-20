@@ -33,7 +33,7 @@ export function discoverSections(root, overrides, mode) {
   root.querySelectorAll("[data-edit]").forEach((element) => {
     const key = element.getAttribute("data-edit") || "";
     if (!SAFE_KEY.test(key)) {
-      console.warn(`Clayforge: ignoring section key "${key}" (letters, numbers, - and _ only).`);
+      console.warn(`ClayForge: ignoring section key "${key}" (letters, numbers, - and _ only).`);
       return;
     }
 

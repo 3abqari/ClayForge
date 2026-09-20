@@ -1,11 +1,11 @@
 ---
 applyTo: "**"
-description: "Framework repo boundary: Clayforge holds no client projects."
+description: "Framework repo boundary: ClayForge holds no client projects."
 ---
 
 # This repo is the framework only
 
-This repository contains Clayforge itself. It must never contain a client
+This repository contains ClayForge itself. It must never contain a client
 project instance.
 
 - Client projects live in their own workspace folder and vendor a copy of the

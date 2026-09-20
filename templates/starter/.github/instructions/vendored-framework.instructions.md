@@ -1,11 +1,11 @@
 ---
 applyTo: "src/clayforge/**"
-description: "Vendored Clayforge framework copy — do not edit in this project."
+description: "Vendored ClayForge framework copy — do not edit in this project."
 ---
 
 # Vendored framework — read only
 
-`src/clayforge/` is a copy of the Clayforge framework, placed here by
+`src/clayforge/` is a copy of the ClayForge framework, placed here by
 `tools/new-project.ps1` and refreshed by `tools/sync.ps1`.
 
 - Never edit anything under `src/clayforge/`. The next sync overwrites it.

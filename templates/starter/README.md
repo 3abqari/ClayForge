@@ -1,6 +1,6 @@
 # {{PROJECT_NAME}}
 
-Built on [Clayforge](https://github.com/) — a light design framework. The client
+Built on [ClayForge](https://github.com/) — a light design framework. The client
 edits copy and design in their own browser; changes stay in `localStorage` and
 export as a JSON snapshot.
 

@@ -1,5 +1,5 @@
 /**
- * The catalogue of design controls Clayforge can offer for a section.
+ * The catalogue of design controls ClayForge can offer for a section.
  * Each control maps to exactly one CSS declaration written into `@layer client`.
  * Values are validated here so an imported snapshot can never inject CSS.
  */

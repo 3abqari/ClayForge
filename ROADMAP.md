@@ -1,10 +1,10 @@
-# Clayforge roadmap
+# ClayForge roadmap
 
 ## Client-selectable page sizes
 
 Status: planned
 
-Clayforge should allow a client to choose from page sizes explicitly approved
+ClayForge should allow a client to choose from page sizes explicitly approved
 by the project designer. It should not expose unrestricted width and height
 fields: changing aspect ratio can rewrap text, collapse fixed grid tracks, and
 clip content that was composed for another format.

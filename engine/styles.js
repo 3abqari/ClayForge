@@ -26,7 +26,7 @@ function styleElement() {
 /**
  * @param {object} project
  * @param {Map<string, import("./sections.js").Section>} sections
- * @param {import("./store.js").ClayforgeState} state
+ * @param {import("./store.js").ClayForgeState} state
  */
 export function compile(project, sections, state) {
   const blocks = [];

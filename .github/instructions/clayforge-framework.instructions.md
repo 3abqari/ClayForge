@@ -1,6 +1,6 @@
 ---
 applyTo: "theme/**,engine/**"
-description: "Clayforge framework files: locked baseline and shared engine."
+description: "ClayForge framework files: locked baseline and shared engine."
 ---
 
 # Framework files

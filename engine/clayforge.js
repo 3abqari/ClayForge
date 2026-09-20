@@ -1,5 +1,5 @@
 /**
- * Clayforge — a light design + content framework.
+ * ClayForge — a light design + content framework.
  *
  * A project supplies markup (sections marked with `data-edit`, copy slots
  * marked with `data-field`), a `content.json` baseline, a `clayforge.json`
@@ -17,7 +17,7 @@ export { ENGINE_VERSION };
 
 const fetchJson = async (url) => {
   const response = await fetch(url, { cache: "no-store" });
-  if (!response.ok) throw new Error(`Clayforge could not load ${url} (${response.status})`);
+  if (!response.ok) throw new Error(`ClayForge could not load ${url} (${response.status})`);
   return response.json();
 };
 
@@ -30,9 +30,9 @@ function resolveMode(config) {
 /**
  * @param {{ configUrl?: string, contentUrl?: string, root?: ParentNode }} [options]
  */
-export async function createClayforge(options = {}) {
+export async function createClayForge(options = {}) {
   const config = await fetchJson(options.configUrl ?? "./clayforge.json");
-  const project = { id: "clayforge-project", name: "Clayforge project", templateVersion: "1.0.0", print: false, ...(config.project || {}) };
+  const project = { id: "clayforge-project", name: "ClayForge project", templateVersion: "1.0.0", print: false, ...(config.project || {}) };
   const baseContent = await fetchJson(options.contentUrl ?? project.content ?? "./content.json");
 
   const root = options.root ?? document.body;
@@ -43,7 +43,7 @@ export async function createClayforge(options = {}) {
 
   sections.forEach((section) => {
     if (section.elements.some((element) => element.hasAttribute("data-field"))) {
-      console.warn(`Clayforge: section "${section.key}" is also a field. Put data-field on a child element instead.`);
+      console.warn(`ClayForge: section "${section.key}" is also a field. Put data-field on a child element instead.`);
     }
   });
 
@@ -160,7 +160,7 @@ export async function createClayforge(options = {}) {
         persist("import");
         if (warnings.length) alert(`Imported with notes:\n\n- ${warnings.join("\n- ")}`);
       } catch {
-        alert("That file is not a valid Clayforge snapshot.");
+        alert("That file is not a valid ClayForge snapshot.");
       }
     }
   };

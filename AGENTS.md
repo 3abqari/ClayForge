@@ -1,6 +1,6 @@
-# Clayforge — agent guide
+# ClayForge — agent guide
 
-Clayforge is a light, build-free design framework. An AI agent generates a
+ClayForge is a light, build-free design framework. An AI agent generates a
 client prototype; the client then edits copy and design **in their own browser**,
 with every change stored locally and exportable as a JSON snapshot the designer
 can replay.
@@ -117,7 +117,7 @@ the matching `body[data-design="..."]` selector inside `@layer design`.
 {
   "formatVersion": 2,
   "framework": "clayforge",
-  "frameworkVersion": "0.3.0",
+  "frameworkVersion": "0.4.0",
   "template": "card-4x9",
   "templateVersion": "1.0.0",
   "savedAt": "2026-09-19T00:00:00.000Z",

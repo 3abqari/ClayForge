@@ -1,9 +1,9 @@
 ---
 applyTo: "src/index.html,src/content.json,src/clayforge.json"
-description: "How to mark up a Clayforge project so the editor discovers it."
+description: "How to mark up a ClayForge project so the editor discovers it."
 ---
 
-# Clayforge markup and content contract
+# ClayForge markup and content contract
 
 The site root is `src/`. The framework is vendored at `src/clayforge/` and is
 referenced with root-absolute paths; the project's own files use `./`.
@@ -15,8 +15,8 @@ referenced with root-absolute paths; the project's own files use `./`.
 - Boot with:
   ```html
   <script type="module">
-    import { createClayforge } from "/clayforge/engine/clayforge.js";
-    await createClayforge();
+    import { createClayForge } from "/clayforge/engine/clayforge.js";
+    await createClayForge();
   </script>
   ```
 - Mark each editable region with `data-edit="key"` plus `data-edit-label`.

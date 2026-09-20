@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-  Creates a new Clayforge project folder outside the framework repo.
+  Creates a new ClayForge project folder outside the framework repo.
 
 .DESCRIPTION
   Copies templates/starter into the target folder, fills in the project id and
@@ -31,7 +31,7 @@ $frameworkPrefix = $frameworkRoot + [System.IO.Path]::DirectorySeparatorChar
 
 if ($target.Equals($frameworkRoot, [StringComparison]::OrdinalIgnoreCase) -or
     $target.StartsWith($frameworkPrefix, [StringComparison]::OrdinalIgnoreCase)) {
-  throw "Projects must live outside the framework folder. $framework is for Clayforge itself."
+  throw "Projects must live outside the framework folder. $framework is for ClayForge itself."
 }
 
 if ((Test-Path $target) -and (Get-ChildItem $target -Force | Measure-Object).Count -gt 0 -and -not $Force) {

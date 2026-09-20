@@ -1,10 +1,10 @@
 /**
- * Clayforge storage: the versioned envelope, localStorage persistence,
+ * ClayForge storage: the versioned envelope, localStorage persistence,
  * and import/export of a client's saved view.
  */
 
 export const FORMAT_VERSION = 2;
-export const ENGINE_VERSION = "0.3.0";
+export const ENGINE_VERSION = "0.4.0";
 const FRAMEWORK = "clayforge";
 
 const SAFE_KEY = /^[a-zA-Z0-9_-]+$/;
@@ -14,7 +14,7 @@ export const storageKey = (projectId) => `clayforge:${projectId}`;
 
 /**
  * @param {{ id: string, template?: string, templateVersion?: string }} project
- * @returns {ClayforgeState}
+ * @returns {ClayForgeState}
  */
 export function emptyState(project) {
   return {
@@ -88,18 +88,18 @@ function cleanPalettes(raw) {
 }
 
 /**
- * Normalises anything claiming to be a Clayforge envelope into a trusted state.
+ * Normalises anything claiming to be a ClayForge envelope into a trusted state.
  * Older format versions are upgraded here.
- * @returns {{ state: ClayforgeState, warnings: string[] }}
+ * @returns {{ state: ClayForgeState, warnings: string[] }}
  */
 export function adoptEnvelope(project, incoming) {
   const state = emptyState(project);
   const warnings = [];
-  if (!isPlainObject(incoming)) return { state, warnings: ["File was not a Clayforge snapshot."] };
+  if (!isPlainObject(incoming)) return { state, warnings: ["File was not a ClayForge snapshot."] };
 
   const version = Number(incoming.formatVersion) || 0;
-  if (version > FORMAT_VERSION) warnings.push(`Snapshot was made by a newer Clayforge (v${version}); unknown fields were dropped.`);
-  if (incoming.framework && incoming.framework !== FRAMEWORK) warnings.push("Snapshot was not produced by Clayforge.");
+  if (version > FORMAT_VERSION) warnings.push(`Snapshot was made by a newer ClayForge (v${version}); unknown fields were dropped.`);
+  if (incoming.framework && incoming.framework !== FRAMEWORK) warnings.push("Snapshot was not produced by ClayForge.");
   if (incoming.template && incoming.template !== state.template) {
     warnings.push(`Snapshot targets template "${incoming.template}" but this project is "${state.template}".`);
   }
@@ -116,7 +116,7 @@ export function adoptEnvelope(project, incoming) {
   return { state, warnings };
 }
 
-/** @returns {ClayforgeState} */
+/** @returns {ClayForgeState} */
 export function loadState(project) {
   const key = storageKey(project.id);
   let stored = null;
@@ -133,7 +133,7 @@ export function saveState(project, state) {
   try {
     localStorage.setItem(storageKey(project.id), JSON.stringify(state));
   } catch {
-    console.warn("Clayforge could not save to localStorage (quota or private mode).");
+    console.warn("ClayForge could not save to localStorage (quota or private mode).");
   }
 }
 
@@ -159,7 +159,7 @@ export async function readSnapshotFile(project, file) {
 }
 
 /**
- * @typedef {object} ClayforgeState
+ * @typedef {object} ClayForgeState
  * @property {number} formatVersion
  * @property {string} framework
  * @property {string} frameworkVersion

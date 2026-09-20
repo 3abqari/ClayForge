@@ -1,4 +1,4 @@
-# Clayforge
+# ClayForge
 
 A light, build-free design framework for shipping a client prototype fast — then
 letting the client edit the copy *and* the design themselves, in their own
@@ -47,7 +47,7 @@ cd ..\acme-landing
 npx wrangler deploy               # assets.directory is "src", no staging
 ```
 
-## Upgrade a project to a newer Clayforge
+## Upgrade a project to a newer ClayForge
 
 ```powershell
 ./tools/sync.ps1 -Project ..\acme-landing

@@ -1,11 +1,11 @@
 ---
 mode: agent
-description: "Scaffold a new Clayforge client project in its own workspace folder."
+description: "Scaffold a new ClayForge client project in its own workspace folder."
 ---
 
-# New Clayforge project
+# New ClayForge project
 
-Create a complete client prototype **outside** this repo. Clayforge holds no
+Create a complete client prototype **outside** this repo. ClayForge holds no
 project instances. Read `AGENTS.md` first.
 
 ## 1. Gather the brief
